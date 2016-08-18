@@ -1,0 +1,20 @@
+first_engine_homepage:
+    path:     /index
+    defaults: { _controller: FirstEngineBundle:Default:index }
+
+first_engine_login:
+    path:     /login
+    defaults: { _controller: FirstEngineBundle:Security:login }
+
+first_engine_login_check:
+    path:     /login_check
+    defaults: { _controller: FirstEngineBundle:Security:loginCheck }
+    
+first_engine_logout:
+    path:     /logout
+    defaults: { _controller: FirstEngineBundle:Security:loginCheck }
+
+first_engine_addpersona:
+    path:     /addpersona/{nombres}/{apellidos}/{sexo}
+    defaults: { _controller: FirstEngineBundle:Access:addpersona }
+        
