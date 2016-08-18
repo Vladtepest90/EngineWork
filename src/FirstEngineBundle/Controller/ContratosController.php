@@ -7,4 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class ContratosController extends Controller
 {
+	
+	public function indexAction(){
+		
+	}
 }
