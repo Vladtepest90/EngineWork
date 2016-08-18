@@ -5,12 +5,14 @@ namespace FirstEngineBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * AcreditacionVehiculos
  *
  * @ORM\Table(name="acreditacion_vehiculos")
  * @ORM\Entity(repositoryClass="FirstEngineBundle\Repository\AcreditacionVehiculosRepository")
+ * @HasLifecycleCallbacks()
  */
 class AcreditacionVehiculos
 {
@@ -120,6 +122,23 @@ class AcreditacionVehiculos
     public function getFechaActualizar()
     {
         return $this->fechaActualizar;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setfechaIngreso()
+    {
+    	$this->fechaIngreso = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setfechaActualizar()
+    {
+    	$this->fechaActualizar = new \DateTime();
     }
 
     /**

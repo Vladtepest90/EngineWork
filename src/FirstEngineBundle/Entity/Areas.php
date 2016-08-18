@@ -7,12 +7,14 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * Areas
  *
  * @ORM\Table(name="areas")
  * @ORM\Entity(repositoryClass="FirstEngineBundle\Repository\AreasRepository")
+ * @HasLifecycleCallbacks()
  */
 class Areas
 {
@@ -199,6 +201,22 @@ class Areas
     public function getFechaActualizar()
     {
         return $this->fechaActualizar;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function setfechaIngreso()
+    {
+    	$this->fechaIngreso = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setfechaActualizar()
+    {
+    	$this->fechaActualizar = new \DateTime();
     }
 
     /**

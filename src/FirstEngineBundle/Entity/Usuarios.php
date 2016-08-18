@@ -9,12 +9,14 @@ use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * Usuarios
  *
  * @ORM\Table(name="usuarios")
  * @ORM\Entity(repositoryClass="FirstEngineBundle\Repository\UsuariosRepository")
+ * @HasLifecycleCallbacks()
  */
 
 
@@ -89,6 +91,7 @@ class Usuarios implements AdvancedUserInterface, \Serializable
      * @var \DateTime
      *
      * @ORM\Column(name="FechaIngreso", type="datetime")
+     * 
      */
     private $fechaIngreso;
 
@@ -369,7 +372,24 @@ class Usuarios implements AdvancedUserInterface, \Serializable
     {
         return $this->fechaActualizar;
     }
-
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setfechaIngreso()
+    {
+    	$this->fechaIngreso = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setfechaActualizar()
+    {
+    	$this->fechaActualizar = new \DateTime();
+    }
+    
     /**
      * Set persona
      *

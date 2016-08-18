@@ -311,6 +311,23 @@ class EmpresaPrincipal
     {
         return $this->fechaActualizar;
     }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setfechaIngreso()
+    {
+    	$this->fechaIngreso = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setfechaActualizar()
+    {
+    	$this->fechaActualizar = new \DateTime();
+    }
 
     /**
      * Add usuarios

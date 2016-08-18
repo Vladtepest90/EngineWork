@@ -3,12 +3,14 @@
 namespace FirstEngineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * AcreditacionEECC
  *
  * @ORM\Table(name="acreditacion_e_e_c_c")
  * @ORM\Entity(repositoryClass="FirstEngineBundle\Repository\AcreditacionEECCRepository")
+ * @HasLifecycleCallbacks()
  */
 class AcreditacionEECC
 {
@@ -217,6 +219,23 @@ class AcreditacionEECC
     public function getFechaActualizar()
     {
         return $this->fechaActualizar;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setfechaIngreso()
+    {
+    	$this->fechaIngreso = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setfechaActualizar()
+    {
+    	$this->fechaActualizar = new \DateTime();
     }
 
     /**

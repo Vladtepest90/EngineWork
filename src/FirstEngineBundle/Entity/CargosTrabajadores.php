@@ -5,12 +5,14 @@ namespace FirstEngineBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * CargosTrabajadores
  *
  * @ORM\Table(name="cargos_trabajadores")
  * @ORM\Entity(repositoryClass="FirstEngineBundle\Repository\CargosTrabajadoresRepository")
+ * @HasLifecycleCallbacks()
  */
 class CargosTrabajadores
 {
@@ -165,6 +167,23 @@ class CargosTrabajadores
     public function getFechaActualizar()
     {
         return $this->fechaActualizar;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setfechaIngreso()
+    {
+    	$this->fechaIngreso = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setfechaActualizar()
+    {
+    	$this->fechaActualizar = new \DateTime();
     }
 
     /**
